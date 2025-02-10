@@ -212,7 +212,7 @@ namespace Compressarr.Services
                 //We need the show folder not the season folder for Sonarr to recognise it.
                 var destinationFolder = Path.GetDirectoryName(Path.GetDirectoryName(workItem.DestinationFile));
 
-                var link = $"{applicationService.SonarrSettings?.APIURL}/api/manualimport?folder={HttpUtility.UrlEncode(destinationFolder)}&filterExistingFiles=true&apikey={applicationService.SonarrSettings?.APIKey}";
+                var link = $"{applicationService.SonarrSettings?.APIURL}/api/v3/manualimport?folder={HttpUtility.UrlEncode(destinationFolder)}&filterExistingFiles=true&apikey={applicationService.SonarrSettings?.APIKey}";
                 logger.LogDebug($"Link: {link}");
 
                 ManualImportEpisodeResponse mir = null;
@@ -295,7 +295,7 @@ namespace Compressarr.Services
 
                 payload.Files = new() { file };
 
-                link = $"{applicationService.SonarrSettings?.APIURL}/api/command?apikey={applicationService.SonarrSettings?.APIKey}";
+                link = $"{applicationService.SonarrSettings?.APIURL}/api/v3/command?apikey={applicationService.SonarrSettings?.APIKey}";
                 logger.LogDebug($"Link: {link}");
 
 
@@ -374,7 +374,7 @@ namespace Compressarr.Services
                 logger.LogInformation($"Test Sonarr Connection.");
                 SystemStatus ss = new();
 
-                var link = $"{settings.APIURL}/api/system/status?apikey={settings.APIKey}";
+                var link = $"{settings.APIURL}/api/v3/system/status?apikey={settings.APIKey}";
                 logger.LogDebug($"LinkURL: {link}");
                 var hc = new HttpClient();
                 try
@@ -430,7 +430,7 @@ namespace Compressarr.Services
                 var sonarrURL = applicationService.SonarrSettings?.APIURL;// settingsManager.Settings[SettingType.SonarrURL];
                 var sonarrAPIKey = applicationService.SonarrSettings?.APIKey; // settingsManager.Settings[SettingType.SonarrAPIKey];
 
-                var link = $"{sonarrURL}/api/episodefile?seriesid={seriesID}&apikey={sonarrAPIKey}";
+                var link = $"{sonarrURL}/api/v3/episodefile?seriesid={seriesID}&apikey={sonarrAPIKey}";
                 logger.LogDebug($"Link: {link}");
 
                 var episodeJSON = string.Empty;
@@ -494,7 +494,7 @@ namespace Compressarr.Services
                 var sonarrURL = applicationService.SonarrSettings?.APIURL;// settingsManager.Settings[SettingType.SonarrURL];
                 var sonarrAPIKey = applicationService.SonarrSettings?.APIKey; // settingsManager.Settings[SettingType.SonarrAPIKey];
 
-                var link = $"{sonarrURL}/api/series?apikey={sonarrAPIKey}";
+                var link = $"{sonarrURL}/api/v3/series?apikey={sonarrAPIKey}";
                 logger.LogDebug($"Link: {link}");
 
                 if (string.IsNullOrWhiteSpace(sonarrURL))
